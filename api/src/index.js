@@ -1,14 +1,15 @@
-const { urlencoded } = require('express');
-const express = require('express');
-const app = express();
+import app from './app.js'
+import  {sequelize}  from './database/database.js'
 
-app.listen(3000);
-console.log('Server on port 3000')
 
-//middlewars
-app.use(express.json());
-app.use(urlencoded({extended:false}));
-
-// routes
-app.use(require('./routes/index'))
-
+async function main(){
+await sequelize.authenticate()
+try {
+console.log('connectio has been established successfully')
+app.listen(3000)
+console.log('server on port 3000')
+} catch (error){
+console.error('Unable to connect to the database', error)
+}
+}
+main()
