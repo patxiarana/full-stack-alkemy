@@ -1,11 +1,16 @@
 import express from "express"
-//middlewars
+import operationsRoutes  from './routes/routes.operations.js'
 
 
-// routes
 
 const app = express()
 
+
+//middlewars
+app.use(express.json())
+
+// routes
+app.use(operationsRoutes)
 
 
 export default app ;
