@@ -10,6 +10,25 @@ export const getOperations = async (req ,res) =>{
     }
     
 }
+
+export const getToltal = async (req,res) =>{
+try{ 
+   const totaloperations = await operations.findAll()
+   console.log(totaloperations)
+  const ingreso = totaloperations.filter(e => e.tipo == "ingreso")
+  const egreso = totaloperations.filter(e => e.tipo == "egreso")
+  console.log(ingreso,egreso)
+  const ingresos1 = ingreso.map(e => e.monto)
+  const egresos1 = egreso.map(e => e.monto)
+  const sumIngresos = ingresos1.reduce((prev, curr) => prev + curr, 0)
+  const sumEgresos  = egresos1.reduce((prev, curr) => prev + curr, 0)
+  const result =  sumIngresos -  sumEgresos
+  res.json(result)
+} catch(error){
+ return res.status(500).json({message: error.message})
+}
+}
+
 export const createOperations = async  (req ,res) =>{
     try{
     const {concepto, fecha, monto, tipo} = req.body
