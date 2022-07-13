@@ -2,7 +2,7 @@ import { bindActionCreators } from "redux";
 
 
 const initialState = {
-    total:[]
+    total:0
 }
 
 
@@ -17,3 +17,4 @@ const rootReducer = (state = initialState, action) => {
         default: return {...state}
     }
 }
+export default rootReducer;

@@ -5,7 +5,7 @@ export function GetTotal(){
     try{
       var json = await axios.get("http://localhost:3000/operations/total");
       return dispatch({
-        type: "GET_TEMPERAMENT",
+        type: "GET_TOTAL",
         payload: json.data
       })
      }catch(e){
