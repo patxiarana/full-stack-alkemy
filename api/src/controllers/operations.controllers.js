@@ -14,7 +14,6 @@ export const getOperations = async (req ,res) =>{
 export const getToltal = async (req,res) =>{
 try{ 
    const totaloperations = await operations.findAll()
-   console.log(totaloperations)
   const ingreso = totaloperations.filter(e => e.tipo == "ingreso")
   const egreso = totaloperations.filter(e => e.tipo == "egreso")
   console.log(ingreso,egreso)
