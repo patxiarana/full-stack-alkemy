@@ -2,7 +2,8 @@ import { bindActionCreators } from "redux";
 
 
 const initialState = {
-    total:0
+    total:0,
+    createOP:[],
 }
 
 
@@ -13,7 +14,12 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         total:action.payload
     }
-
+    case "CREATE_OP":
+        let operaciones = []
+        return{
+       ...state,
+       createOP: operaciones.concat(action.payload)
+        }
         default: return {...state}
     }
 }

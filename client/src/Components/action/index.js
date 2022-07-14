@@ -13,3 +13,17 @@ export function GetTotal(){
   }
   }
   }
+
+  export function CreateOp(valores){
+    return async function (dispatch){
+     try{  
+      var json = await axios.post("http://localhost:3000/operations/create",valores);
+     return dispatch({
+  type: "CREATE_OP",
+  payload: json.data
+  })
+  }catch (err){
+    return err
+      }
+  }
+  }
