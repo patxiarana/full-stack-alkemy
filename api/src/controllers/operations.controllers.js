@@ -30,11 +30,12 @@ try{
 
 export const createOperations = async  (req ,res) =>{
     try{
-    const {concepto, fecha, monto, tipo} = req.body
+        console.log(req.body)
+    const {concepto, monto, fecha, tipo} = req.body
     const newOperation = await operations.create({
         concepto,
-        fecha,
         monto,
+        fecha,
         tipo,
     })
     res.json(newOperation)
