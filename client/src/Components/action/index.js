@@ -27,3 +27,18 @@ export function GetTotal(){
       }
   }
   }
+
+
+  export function GetAllOp(){
+    return async function (dispatch){
+      try{  
+       var json = await axios.get("http://localhost:3000/operations");
+      return dispatch({
+   type: "GET_OP",
+   payload: json.data
+   })
+   }catch (err){
+     return err
+       }
+   }
+}
