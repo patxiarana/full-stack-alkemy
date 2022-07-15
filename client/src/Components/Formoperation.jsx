@@ -32,9 +32,11 @@ export default function Formoperation() {
   const clases = useStyles()
     const formik = useFormik({
         onSubmit: async(valores, { resetForm }) => {
-            console.log(valores)
-             await axios.post("http://localhost:3000/operations/create",valores)
-           // dispatch(CreateOp(valores))
+         console.log(valores)
+         if(!valores.tipo){
+            Swal.fire('por favor ingrece un tipo')
+         } // await axios.post("http://localhost:3000/operations/create",valores)
+            dispatch(CreateOp(valores))
           resetForm("")
      },
         initialValues: {
@@ -55,9 +57,6 @@ export default function Formoperation() {
              }
             if (!valores.fecha) {
                 errors.fecha = "Debes agregar una fecha"
-            }
-            if (!valores.tipo) {
-                errors.tipo = "Debes agregar un tipo"
             }
             return errors
         }
@@ -106,6 +105,7 @@ export default function Formoperation() {
                     id="fecha"
                     name="fecha"
                     label="fecha"
+                    type='date'
                     value={formik.values.fecha}
                     onChange={formik.handleChange}
                     error={formik.touched.fecha && Boolean(formik.errors.fecha)}
@@ -113,11 +113,11 @@ export default function Formoperation() {
                     onBlur={formik.handleBlur} />
                     <div>
                     <Field name="tipo" as="select">
+                        <option>elija un tipo</option>
                       <option value="ingreso">ingreso</option>
                       <option value="egreso">egreso</option>
                     </Field>
                     </div>
-        
             <Button style={{ backgroundColor: "black", color: 'white', borderRadius: '5px', width: "60%", margin: "15px" }} color="primary" variant="contained" fullWidth type="submit">
                     Crear
                 </Button>
