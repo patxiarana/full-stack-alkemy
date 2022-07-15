@@ -18,7 +18,7 @@ var corsOptions = {
 }
 
 const router = Router()
-router.get('/operations/total',cors(corsOptions), getToltal)
+router.get('/operations/total', getToltal)
 router.get('/operations', getOperations)
 router.post('/operations/create',createOperations)
 router.put('/operations/:id',cors(corsOptions),updateOperations )
