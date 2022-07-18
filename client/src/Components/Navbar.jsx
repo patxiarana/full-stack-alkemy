@@ -1,12 +1,17 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import BurguerButton from './Burgerbutton'
-const Navbar = () =>{
+import { useNavigate } from "react-router-dom";
+import Home from './Home'
 
+
+const Navbar = () =>{
+  let navigate = useNavigate();
     const [clicked, setClicked] = useState(false)
     const handleClick = () => {
       //cuando esta true lo pasa a false y vice versa
       setClicked(!clicked)
+      navigate("/NavBar")
     }
 
 
@@ -19,8 +24,6 @@ const Navbar = () =>{
           <a onClick={handleClick} href="/home">Home</a>
           <a onClick={handleClick} href="#h">iniciar sesion</a>
           <a onClick={handleClick} href="#h">Registrarse</a>
-          <a onClick={handleClick} href="/AllOp">ver operaciones</a>
-          <a onClick={handleClick} href="/formOp">crear operacion</a>
         </div>
         <div className='burguer'>
           <BurguerButton clicked={clicked} handleClick={handleClick} />
@@ -28,7 +31,6 @@ const Navbar = () =>{
         <BgDiv className={`initial ${clicked ? ' active' : ''}`}></BgDiv>
 </ContainerNav>
 </>
-
 
     )
 }
@@ -38,7 +40,7 @@ export default Navbar;
 const ContainerNav = styled.nav`
 h2{
     color: white;
-    font-weight: 400;
+     font-weight: 400;
     span{
       font-weight: bold;
     }
