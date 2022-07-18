@@ -1,8 +1,6 @@
 import { Routes, Route} from 'react-router-dom';
 import Navbar from './Components/Navbar';
 import Home from './Components/Home'
-import Formoperation from './Components/Formoperation';
-import AllOperations from './Components/AllOperations';
 function App() {
 
   return (
@@ -10,8 +8,6 @@ function App() {
   <Navbar/>
   <Routes>
   <Route path="/home" element={<Home />} />
-  <Route path="/formOp" element={<Formoperation/>} />
-  <Route path="/AllOp" element={<AllOperations/>} />
 </Routes>
 </div>
   );
