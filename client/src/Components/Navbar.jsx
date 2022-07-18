@@ -19,7 +19,7 @@ const Navbar = () =>{
           <a onClick={handleClick} href="/home">Home</a>
           <a onClick={handleClick} href="#h">iniciar sesion</a>
           <a onClick={handleClick} href="#h">Registrarse</a>
-          <a onClick={handleClick} href="#h">ver operaciones</a>
+          <a onClick={handleClick} href="/AllOp">ver operaciones</a>
           <a onClick={handleClick} href="/formOp">crear operacion</a>
         </div>
         <div className='burguer'>

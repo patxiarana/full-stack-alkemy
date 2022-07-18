@@ -17,42 +17,7 @@ const  MaterialCard = (props) => {
 console.log(props)
   return (
     <Grid container spacing={2}>
-    <Grid item xs={12} md={6} lg={3} className={classes.card}>
-      <Box
-        bgcolor='primary.main'
-        color="primary.contrastText"
-        p={2}
-        textAlign="center"
-      >
-     <p>concepto:{props.concepto}</p>
-     <p>monto:{props.monto}</p>
-     <p>fecha:{props.fecha}</p>
-     <p>tipo:{props.tipo}</p>
-     <button>delete</button>
-     <button>update</button>
-      </Box>
-    </Grid>
-    <Grid item xs={12} md={6} lg={3} className={classes.card}>
-      <Box >
-     <p>concepto:{props.concepto}</p>
-     <p>monto:{props.monto}</p>
-     <p>fecha:{props.fecha}</p>
-     <p>tipo:{props.tipo}</p>
-     <button>delete</button>
-     <button>update</button>
-      </Box>
-    </Grid>
-    <Grid item xs={12} md={6} lg={3} className={classes.card}>
-      <Box>
-     <p>concepto:{props.concepto}</p>
-     <p>monto:{props.monto}</p>
-     <p>fecha:{props.fecha}</p>
-     <p>tipo:{props.tipo}</p>
-     <button>delete</button>
-     <button>update</button>
-    </Box>
-    </Grid>
-    <Grid item xs={12} md={6} lg={3} className={classes.card}>
+    <Grid item xs={12} md={12} lg={12} className={classes.card}>
       <Box>
      <p>concepto:{props.concepto}</p>
      <p>monto:{props.monto}</p>
@@ -62,7 +27,7 @@ console.log(props)
      <button>update</button>
       </Box>
     </Grid>
-  </Grid>
+    </Grid>
   );
 };
 
