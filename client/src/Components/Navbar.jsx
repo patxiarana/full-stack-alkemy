@@ -22,8 +22,8 @@ const Navbar = () =>{
     <h2>FULL STACK <span>ALKEMY</span></h2>
     <div className={`links ${clicked ? 'active' : ''}`}>
           <a onClick={handleClick} href="/home">Home</a>
-          <a onClick={handleClick} href="#h">iniciar sesion</a>
-          <a onClick={handleClick} href="#h">Registrarse</a>
+          <a onClick={handleClick} href="/user/SignIn" >iniciar sesion</a>
+          <a onClick={handleClick} href="/user/SignUp">Registrarse</a>
         </div>
         <div className='burguer'>
           <BurguerButton clicked={clicked} handleClick={handleClick} />

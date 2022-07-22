@@ -3,6 +3,15 @@ import MaterialTable from "material-table";
 import axios from 'axios';
 import {Modal, TextField, Button} from '@material-ui/core';
 import {makeStyles} from '@material-ui/core/styles';
+import Box from '@mui/material/Box';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
+
+
+
+
 import './home.css'
 const columns= [
   { title: 'Concepto', field: 'concepto' },
@@ -11,7 +20,7 @@ const columns= [
   { title: 'Tipo', field: 'tipo', type: 'tipo'}
 ];
 const baseUrl="http://localhost:3000/operations";
-
+const baseUrlTotal="http://localhost:3000/operations/total"
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -36,6 +45,7 @@ const useStyles = makeStyles((theme) => ({
 function Home() {
   const styles= useStyles();
   const [data, setData]= useState([]);
+  const [total, seTotal]= useState(0);
   const [modalInsertar, setModalInsertar]= useState(false);
   const [modalEditar, setModalEditar]= useState(false);
   const [modalEliminar, setModalEliminar]= useState(false);
@@ -58,11 +68,19 @@ function Home() {
   const peticionGet=async()=>{
     await axios.get(baseUrl)
     .then(response=>{
-     setData(response.data);
+      setData(response.data);
     }).catch(error=>{
       console.log(error);
     })
   }
+ ( async()=>{
+    await axios.get(baseUrlTotal)
+    .then(response=>{
+      seTotal(response.data);
+    }).catch(error=>{
+      console.log(error);
+    })
+  })()
 
   const peticionPost=async()=>{
     await axios.post(baseUrl,operacionSeleccionada)
@@ -135,11 +153,25 @@ function Home() {
 <br />
 <TextField className={styles.inputMaterial} label="Fecha" name="fecha"  type="date"  onChange={handleChange}/>
       <br />
-<TextField className={styles.inputMaterial} label="Tipo" name="tipo" onChange={handleChange}/>
+      <Box sx={{ minWidth: 120 }}>
+      <FormControl fullWidth>
+        <InputLabel id="tipo">tipo</InputLabel>
+        <Select
+          labelId="tipo"
+          id="tipo"
+          name='tipo'
+          label="tipo"
+          onChange={handleChange}
+        >
+          <MenuItem value='ingreso'>ingreso</MenuItem>
+          <MenuItem value='egreso'>egreso</MenuItem>
+        </Select>
+      </FormControl>
+    </Box>
       <br /><br />
       <div align="right">
         <Button color="primary" onClick={()=>peticionPost()}>Insertar</Button>
-        <Button onClick={()=>abrirCerrarModalInsertar()}>Cancelar</Button>
+        <Button onClick={()=>abrirCerrarModalInsertar()}>Cancelary</Button>
       </div>
     </div>
   )
@@ -175,6 +207,7 @@ function Home() {
 
   return (
     <div className="Home">
+    <h2>Total:{total}</h2>
       <br />
       <Button onClick={()=>abrirCerrarModalInsertar()}>Incertar operacion</Button>
       <br /><br />
