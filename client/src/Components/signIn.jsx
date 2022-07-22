@@ -63,7 +63,7 @@ export const   SignIn = () => {
 	useEffect(() => {
 		const loggedUserJSON = window.localStorage.getItem('token')
 		if (loggedUserJSON) {
-			navigate("/")
+			navigate("/home")
 		}
 	}, [navigate])
 
@@ -79,11 +79,15 @@ export const   SignIn = () => {
 				
 				}
 			}).then(response => {
-				Swal.fire("se a registrado con exito")
-				navigate("/home")
+                console.log(response)
+                if(response.data.token){
+				window.localStorage.setItem("token", response.data.token)
+                window.location.reload();
+            }
 			}).catch(err => {
-				if (err.response.status === 400) {
-					Swal.fire(err.response.data.error)
+                console.log(err.response.data)
+				if (err.response.status === 400 ||err.response.status === 401) {
+					Swal.fire(err.response.data.msg)
 
 				}
 			})

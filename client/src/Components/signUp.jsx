@@ -61,12 +61,7 @@ export const   SignUp = () => {
 	const classes = useStyles()
 
 
-	useEffect(() => {
-		const loggedUserJSON = window.localStorage.getItem('token')
-		if (loggedUserJSON) {
-			navigate("/")
-		}
-	}, [navigate])
+
 
 	const handleRegister = async (event) => {
 		try {
@@ -80,8 +75,10 @@ export const   SignUp = () => {
 				
 				}
 			}).then(response => {
+               if(response.data.token){
 				Swal.fire("se a registrado con exito")
-				navigate("/home")
+                navigate("/user/SignIn")
+               }
 			}).catch(err => {
 				if (err.response.status === 400) {
 					Swal.fire(err.response.data.error)

@@ -8,7 +8,7 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
-
+import {  useNavigate } from 'react-router-dom'
 
 
 
@@ -43,6 +43,14 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Home() {
+  const navigate = useNavigate()
+  useEffect(() => {
+		const loggedUserJSON = window.localStorage.getItem('token')
+		if (!loggedUserJSON) {
+			navigate("/user/SignUp")
+		}
+	}, [navigate])
+
   const styles= useStyles();
   const [data, setData]= useState([]);
   const [total, seTotal]= useState(0);
