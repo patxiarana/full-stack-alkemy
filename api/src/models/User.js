@@ -2,27 +2,42 @@ import {DataTypes} from 'sequelize';
 import {sequelize} from '../database/database.js';
 import { operations } from './operations.js';
 
-export const user = sequelize.define('users',{
+export const user = sequelize.define('User',{
     id:{
         type: DataTypes.INTEGER,
         primaryKey:true,
         autoIncrement:true, 
     },
     email:{
-     type: DataTypes.STRING
+     type: DataTypes.STRING,
+     allowNull:false,
+     unique: true,
+     validate: {
+       isEmail: {
+         msg: "El email tiene que ser un correo valido"
+       },
+     },
     },
+
     password:{
-      type:DataTypes.INTEGER
-    }, 
-    
-})
+      type:DataTypes.STRING,
+      allowNull:false,
+      validate: {
+        len: {
+          args: [6, 255],
+          msg: "La contraseña tiene que tener minimamente 6 caracteres"
+        }
+      }
+    },
+  },
+  {
+    tableName: "users"
+  });
 
-user.hasMany(operations,{
-    foreignkey:'userId',
-    sourcekey:'id'
-})
+  user.associate = function(models) {
+    // associations can be defined here
+  };
 
-operations.belongsTo(user,{
-    foreignkey:'userId',
-    targetId:'id'
-})
+
+
+
