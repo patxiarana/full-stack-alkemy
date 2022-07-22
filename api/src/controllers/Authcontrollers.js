@@ -26,7 +26,7 @@ if(!user){
     console.log('estoy aca')
     res.json({
         user:user,
-        toke: token
+        token: token
     })
 
    } else {
