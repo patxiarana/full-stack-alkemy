@@ -19,8 +19,7 @@ const columns= [
   { title: 'Fecha', field: 'fecha' },
   { title: 'Tipo', field: 'tipo', type: 'tipo'}
 ];
-const baseUrl="http://localhost:3000/operations";
-const baseUrlTotal="http://localhost:3000/operations/total"
+
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -50,7 +49,10 @@ function Home() {
 			navigate("/user/SignUp")
 		}
 	}, [navigate])
-
+  const id = window.localStorage.getItem('id')
+  const baseUrl=`http://localhost:3000/user/operations/${id}`;
+  const baseUrlTotal=`http://localhost:3000/user/operations/total/${id}`
+  const baseUrl2=`http://localhost:3000/operations`
   const styles= useStyles();
   const [data, setData]= useState([]);
   const [total, seTotal]= useState(0);
@@ -62,7 +64,8 @@ function Home() {
     monto: "",
     id: "",
     fecha: "",
-    tipo: ""
+    tipo: "",
+    userId:id
   })
 
   const handleChange=e=>{
@@ -91,7 +94,7 @@ function Home() {
   })()
 
   const peticionPost=async()=>{
-    await axios.post(baseUrl,operacionSeleccionada)
+    await axios.post(baseUrl2,operacionSeleccionada)
     .then(response=>{
       setData(data.concat(response.data));
       abrirCerrarModalInsertar();
@@ -101,7 +104,7 @@ function Home() {
   }
 
   const peticionPut=async()=>{
-    await axios.put(baseUrl+"/"+operacionSeleccionada.id, operacionSeleccionada)
+    await axios.put(baseUrl2+"/"+operacionSeleccionada.id, operacionSeleccionada)
     .then(response=>{
       var dataNueva= data;
       dataNueva.map(operacion=>{
@@ -119,7 +122,7 @@ function Home() {
   }
 
   const peticionDelete=async()=>{
-    await axios.delete(baseUrl+"/"+operacionSeleccionada.id)
+    await axios.delete(baseUrl2+"/"+operacionSeleccionada.id)
     .then(response=>{
       setData(data.filter(operacion=>operacion.id!==operacionSeleccionada.id));
       abrirCerrarModalEliminar();

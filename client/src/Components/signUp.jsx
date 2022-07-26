@@ -80,9 +80,11 @@ export const   SignUp = () => {
                 navigate("/user/SignIn")
                }
 			}).catch(err => {
-				if (err.response.status === 400) {
+				console.log(err)
+				if (err.response.status === 400 ) {
 					Swal.fire(err.response.data.error)
-
+				} if(err.response.status === 500){
+				Swal.fire(err.response.data.errors[0].message)
 				}
 			})
 		} catch (e) {

@@ -26,13 +26,13 @@ const Navbar = () =>{
     const handleLogout = e => {
  
       Swal.fire({
-          title: 'Are you sure?',
-          text: "you are closing session",
+          title: 'esta seguro?',
+          text: "usted esta cerrando sesion",
           icon: 'warning',
           showCancelButton: true,
           confirmButtonColor: '#3085d6',
           cancelButtonColor: '#d33',
-          confirmButtonText: 'Yes, log out!'
+          confirmButtonText: 'Si!'
         }).then((result) => {
           if(result.isConfirmed) {
              setUser(null)

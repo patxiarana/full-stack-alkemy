@@ -82,6 +82,7 @@ export const   SignIn = () => {
                 console.log(response)
                 if(response.data.token){
 				window.localStorage.setItem("token", response.data.token)
+				window.localStorage.setItem("id", response.data.user.id)
                 window.location.reload();
             }
 			}).catch(err => {
