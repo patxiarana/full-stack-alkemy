@@ -1,18 +1,49 @@
-import React, { useState } from 'react'
+import React, {useEffect, useState } from 'react'
 import styled from 'styled-components'
 import BurguerButton from './Burgerbutton'
 import { useNavigate } from "react-router-dom";
+import Swal from 'sweetalert2'
+import './button.css'
 import Home from './Home'
 
 
 const Navbar = () =>{
+
+  useEffect(()=>{
+    const loggedUserJSON = window.localStorage.getItem('token')
+       setUser(loggedUserJSON)
+      },[])
+    
   let navigate = useNavigate();
+  const [user,setUser] = useState('');
     const [clicked, setClicked] = useState(false)
     const handleClick = () => {
       //cuando esta true lo pasa a false y vice versa
       setClicked(!clicked)
       navigate("/NavBar")
     }
+
+    const handleLogout = e => {
+ 
+      Swal.fire({
+          title: 'Are you sure?',
+          text: "you are closing session",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Yes, log out!'
+        }).then((result) => {
+          if(result.isConfirmed) {
+             setUser(null)
+            window.localStorage.removeItem('token')
+            window.location.reload();
+          navigate("/user/SignIn")
+            }
+        })
+   }
+
+
 
 
 
@@ -24,6 +55,7 @@ const Navbar = () =>{
           <a onClick={handleClick} href="/home">Home</a>
           <a onClick={handleClick} href="/user/SignIn" >iniciar sesion</a>
           <a onClick={handleClick} href="/user/SignUp">Registrarse</a>
+         <button className='button' ><a onClick={handleLogout}>cerrar sesion</a></button>
         </div>
         <div className='burguer'>
           <BurguerButton clicked={clicked} handleClick={handleClick} />
