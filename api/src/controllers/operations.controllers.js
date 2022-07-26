@@ -3,7 +3,11 @@ import {operations} from '../models/operations.js'
 
 export const getOperations = async (req ,res) =>{
     try{
-        const Operations = await operations.findAll();
+        const {id} = req.params
+        console.log(id)
+        const Operations = await operations.findAll({
+            where:{userId:id}
+        });
         res.json(Operations)
     }catch(error){
         return res.status(500).json({message: error.message})
@@ -13,7 +17,10 @@ export const getOperations = async (req ,res) =>{
 
 export const getToltal = async (req,res) =>{
 try{ 
-   const totaloperations = await operations.findAll()
+    const {id} = req.params
+   const totaloperations = await operations.findAll({
+    where:{userId:id}
+});
   const ingreso = totaloperations.filter(e => e.tipo == "ingreso")
   const egreso = totaloperations.filter(e => e.tipo == "egreso")
   console.log(ingreso,egreso)
@@ -31,12 +38,13 @@ try{
 export const createOperations = async  (req ,res) =>{
     try{
         console.log(req.body)
-    const {concepto, monto, fecha, tipo} = req.body
+    const {concepto, monto, fecha, tipo, userId} = req.body
     const newOperation = await operations.create({
         concepto,
         monto,
         fecha,
         tipo,
+        userId
     })
     res.json(newOperation)
     }catch(error){

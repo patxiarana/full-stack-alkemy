@@ -29,15 +29,16 @@ export const user = sequelize.define('User',{
         }
       }
     },
-  },
-  {
-    tableName: "users"
-  });
+  },);
 
-  user.associate = function(models) {
-    // associations can be defined here
-  };
-
+user.hasMany(operations,{
+  foreignKey:'userId',
+  sourceKey:'id'
+})
+operations.belongsTo(user,{
+  foreignKey:'userId',
+  targetId:'id'
+})
 
 
 
